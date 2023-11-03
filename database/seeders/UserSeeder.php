@@ -16,8 +16,9 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Alexander Duarte Garcia',
             'email' => 'toto_300_toto@hotmail.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'idSucursal' => 1
         ])->assignRole('Admin');
-        User::factory(9)->create();
+        
     }
 }

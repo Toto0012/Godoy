@@ -22,6 +22,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['middleware' => ['jwt.auth']], function () {
+  // Rutas protegidas por JWT
+  Route::post('register',[AuthController::class,'register'])->name('register');
+});
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
@@ -30,5 +36,4 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('refresh', [AuthController::class, 'refresh'])->name('refresh');
     Route::post('me', [AuthController::class, 'me'])->name('me');
-    Route::post('register',[AuthController::class,'register'])->name('register');
   });
