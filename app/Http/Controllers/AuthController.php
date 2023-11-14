@@ -88,7 +88,9 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(),[
             'name' => 'required',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:8'
+            'password' => 'required|string|min:8',
+            'idSucursal' => 'required',
+            'roles' => 'required'
         ]);
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(),400);
@@ -96,7 +98,7 @@ class AuthController extends Controller
        $user = User::create(array_merge(
         $validator->validate(),
         ['password' => bcrypt($request->password)]
-       ));
+       ))->assignRole($request->roles);
        return response()->json([
         'message' => 'Usuario registrado con exito',
         'user' => $user 

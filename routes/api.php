@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\SucursalController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Middlewares\RoleMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,20 +15,21 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-/*
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-  return $request->user();
-});
-*/
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::group(['middleware' => ['jwt.auth']], function () {
-  // Rutas protegidas por JWT
+//Ruta para crear usuarios, esta protegida
+Route::group(['middleware' => ['jwt.auth', RoleMiddleware::class . ':Admin']], function () {
   Route::post('register',[AuthController::class,'register'])->name('register');
 });
 
+//Ruta para sucursales
+Route::group([
+  'middleware' => ['jwt.auth', RoleMiddleware::class . ':Admin'],
+  'prefix' => 'sucursal'
+], function ($route) {
+  Route::get('index', [SucursalController::class, 'index'])->name('sucursal.index');
+  
+});
+
+//Rutas para el usuario
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
