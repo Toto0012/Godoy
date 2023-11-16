@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 
-class Sucursal extends Model
+class Producto extends Model
 {
     use HasFactory;
 
@@ -15,11 +14,11 @@ class Sucursal extends Model
      *
      * @var array<int, string>
      */
-    protected $table = 'sucursales';
+    protected $table = 'productos';
+
     protected $fillable = [
         'nombre',
-        'direccion',
-        'telefono',
+        'precio_unitario',
     ];
 
     /**

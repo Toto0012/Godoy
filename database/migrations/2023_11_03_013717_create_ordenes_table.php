@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('ordenes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idUsuario');
-            $table->foreign('idUsuario')->references('id')->on('users');
+            $table->unsignedBigInteger('id_usuario');
+            $table->foreign('id_usuario')->references('id')->on('users');
             $table->date('fecha');
             $table->char('estatus',10);
             $table->char('mesa',1);

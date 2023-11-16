@@ -20,8 +20,8 @@ return new class extends Migration
             $table->decimal('gasto',7,2);
             $table->decimal('precio',6,2);
             $table->date('fecha');
-            $table->unsignedBigInteger('idSucursal');
-            $table->foreign('idSucursal')->references('id')->on('sucursales');
+            $table->unsignedBigInteger('sucursal_id');
+            $table->foreign('sucursal_id')->references('id')->on('sucursales');
             $table->timestamps();
         });
     }

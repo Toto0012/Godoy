@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('idSucursal')->after('id');
-            $table->foreign('idSucursal')->references('id')->on('sucursales');
+            $table->unsignedBigInteger('id_sucursal')->after('id');
+            $table->foreign('id_sucursal')->references('id')->on('sucursales');
         });
     }
 
@@ -23,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('users_idSucursal_foreign'); // Elimina la restricción de llave foránea
-            $table->dropColumn('idSucursal'); // Elimina la columna          
+            $table->dropForeign(['id_sucursal']); // Elimina la restricción de llave foránea
+            $table->dropColumn('id_sucursal'); // Elimina la columna          
         });
     }
 };

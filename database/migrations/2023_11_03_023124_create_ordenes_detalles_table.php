@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('ordenes_detalles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('idProducto');
-            $table->foreign('idProducto')->references('id')->on('productos');
-            $table->unsignedBigInteger('idOrden');
-            $table->foreign('idOrden')->references('id')->on('ordenes');
-            $table->smallInteger('precioUnitario');
+            $table->unsignedBigInteger('id_producto');
+            $table->foreign('id_producto')->references('id')->on('productos');
+            $table->unsignedBigInteger('id_orden');
+            $table->foreign('id_orden')->references('id')->on('ordenes');
+            $table->smallInteger('precio_unitario');
             $table->smallInteger('cantidad');
+            $table->smallInteger('total');
             $table->smallInteger('descuento');
             $table->timestamps();
         });

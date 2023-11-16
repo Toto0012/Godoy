@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 
-class Sucursal extends Model
+class Orden extends Model
 {
     use HasFactory;
 
@@ -15,11 +14,12 @@ class Sucursal extends Model
      *
      * @var array<int, string>
      */
-    protected $table = 'sucursales';
+    protected $table = 'ordenes';
+
     protected $fillable = [
-        'nombre',
-        'direccion',
-        'telefono',
+        'fecha',
+        'estatus',
+        'mesa',
     ];
 
     /**

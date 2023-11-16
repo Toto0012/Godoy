@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SucursalController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Middlewares\RoleMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
+//WEB ROUTES ADMIN PROTECTED
+Route::group(['middleware' => ['jwt.auth', RoleMiddleware::class . ':Admin']], function () {
+    //rutas sucursales 
+    Route::prefix('sucursal')->group(function () {
+        Route::get('index', [SucursalController::class, 'index']);
+    });    
+  });
+  
