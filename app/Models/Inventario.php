@@ -14,8 +14,8 @@ class Inventario extends Model
     protected $fillable = [
         'nombre',
         'habia',
-        'entró',
-        'quedó',
+        'entro',
+        'quedo',
         'gasto',
         'precio',
         'fecha'
