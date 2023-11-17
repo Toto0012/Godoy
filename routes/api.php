@@ -15,11 +15,11 @@ use Spatie\Permission\Middlewares\RoleMiddleware;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::group(['middleware' => ['jwt.auth', RoleMiddleware::class . ':Admin']], function () {
+Route::group(['middleware' => ['jwt.auth', 'cors',RoleMiddleware::class . ':Admin']], function () {
     Route::post('register', [AuthController::class, 'register'])->name('register');
 });
 
-Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
+Route::group(['middleware' => ['api', 'cors'], 'prefix' => 'auth'], function () {
     Route::post('login', [AuthController::class, 'login'])->name('login');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('refresh', [AuthController::class, 'refresh'])->name('refresh');

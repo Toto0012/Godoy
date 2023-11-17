@@ -17,10 +17,11 @@ use Spatie\Permission\Middlewares\RoleMiddleware;
 */
 
 //WEB ROUTES ADMIN PROTECTED
-Route::group(['middleware' => ['jwt.auth', RoleMiddleware::class . ':Admin']], function () {
+Route::group(['middleware' => ['jwt.auth', 'cors',RoleMiddleware::class . ':Admin']], function () {
     //rutas sucursales 
     Route::prefix('sucursal')->group(function () {
         Route::get('index', [SucursalController::class, 'index']);
+        Route::get('show/{id}', [SucursalController::class, 'show']);
     });    
   });
   

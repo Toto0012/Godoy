@@ -12,7 +12,9 @@ class SucursalController extends Controller
      */
     public function index()
     {
-        return $sucursales = Sucursal::select('id','nombre')->get();
+        $data = Sucursal::all();
+
+        return response()->json(['Sucursal' => $data]);
     }
 
     /**
@@ -20,7 +22,13 @@ class SucursalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = Sucursal::create([
+            'nombre' => $request->nombre,
+            'direccion' => $request->direccion,
+            'telefono' => $request->telefono,
+        ]);
+
+        return response()->json(['Sucursal:' => $data]);
     }
 
     /**
@@ -28,7 +36,8 @@ class SucursalController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Sucursal::findOrFail($id);
+        return response()->json(['Sucursal: ' => $data]);
     }
 
     /**
@@ -36,14 +45,21 @@ class SucursalController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = Sucursal::findOrFail($id);
+
+        $data->update($request->all());
+
+        return response()->json(['Sucursal' => $data]);
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        Sucursal::findOrFail($id)->delete();
+
+        return response()->json(['message' => 'Usuario eliminado']);
     }
 }

@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -18,7 +19,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     /**
@@ -30,7 +31,7 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -84,26 +85,32 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
-    public function register(Request $request){
-        $validator = Validator::make($request->all(),[
-            'nombre' => 'required',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:8',
-            'id_sucursal' => 'required',
-            'domicilio' => 'required',
-            'telefono' => 'required',
-            'roles' => 'required'
+
+    public function register(UserRequest $request)
+    {
+
+        $user = User::create([
+            'nombre' => $request->nombre,
+            'apellido_paterno' => $request->apellido_paterno,
+            'apellido_materno' => $request->apellido_materno,
+            'telefono' => $request->telefono,
+            'domicilio' => $request->domicilio,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'rol' => $request->rol,
+            'id_sucursal' => $request->id_sucursal
         ]);
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(),400);
+
+        if(!$request->rol){
+            $this->assignDefaultRole($user);
+        }else{
+            $user->assignRole($request->rol);
         }
-       $user = User::create(array_merge(
-        $validator->validate(),
-        ['password' => bcrypt($request->password)]
-       ))->assignRole($request->roles);
-       return response()->json([
-        'message' => 'Usuario registrado con exito',
-        'user' => $user 
-       ],201);
+        return response()->json(['usuario' => $user], 200);
+    }
+
+    private function assignDefaultRole(User $user)
+    {
+        $user->assignRole('mesero');
     }
 }

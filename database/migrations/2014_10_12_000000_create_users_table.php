@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('telefono');
             $table->string('domicilio');
+            $table->string('rol');
             $table->rememberToken();
             $table->timestamps();
         });
