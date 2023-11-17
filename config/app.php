@@ -185,4 +185,10 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'cors' => [
+        'supportsCredentials' => true,
+        'allowedOrigins' => ['*'],
+        'allowedHeaders' => ['*'],
+        'allowedMethods' => ['*'],
+    ],
 ];
