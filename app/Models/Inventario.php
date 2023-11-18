@@ -18,7 +18,8 @@ class Inventario extends Model
         'quedo',
         'gasto',
         'precio',
-        'fecha'
+        'fecha',
+        'sucursal_id',
     ];
 
     protected $casts = [

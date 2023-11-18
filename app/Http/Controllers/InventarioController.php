@@ -30,6 +30,7 @@ class InventarioController extends Controller
             'gasto' => $request->gasto,
             'precio' => $request->precio,
             'fecha' => $request->fecha,
+            'sucursal_id' => $request->sucursal_id,
         ]);
 
         return response()->json(['data:' => $data]);

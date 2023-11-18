@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\SucursalController;
+use App\Models\Inventario;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Middlewares\RoleMiddleware;
 
@@ -29,10 +31,10 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
 
     //Rutas de Inventario
     Route::prefix('inventario')->group(function () {
-        Route::get('index', [SucursalController::class, 'index']);
-        Route::get('show/{id}', [SucursalController::class, 'show']);
-        Route::post('store', [SucursalController::class, 'store']);
-        Route::post('update/{id}', [SucursalController::class, 'update']);
-        Route::delete('delete/{id}', [SucursalController::class, 'destroy']);
+        Route::get('index', [InventarioController::class, 'index']);
+        Route::get('show/{id}', [InventarioController::class, 'show']);
+        Route::post('store', [InventarioController::class, 'store']);
+        Route::post('update/{id}', [InventarioController::class, 'update']);
+        Route::delete('delete/{id}', [InventarioController::class, 'destroy']);
     });
 });
