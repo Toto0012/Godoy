@@ -14,7 +14,7 @@ class SucursalSeeder extends Seeder
     {
          Sucursal::create([
             'nombre' => 'Taqueria Él Primo De Guamúchil',
-            'domicilio' => 'Blvd. Alfonso G. Calderón Velarde #sn local 7 desarrollo urbano 3 ríos, Congreso del Estado, 80020 Culiacán Rosales, Sin.',
+            'direccion' => 'Blvd. Alfonso G. Calderón Velarde #sn local 7 desarrollo urbano 3 ríos, Congreso del Estado, 80020 Culiacán Rosales, Sin.',
             'telefono' => '+526672346795'          
         ]);
     }

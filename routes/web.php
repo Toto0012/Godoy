@@ -16,12 +16,14 @@ use Spatie\Permission\Middlewares\RoleMiddleware;
 |
 */
 
-//WEB ROUTES ADMIN PROTECTED
-Route::group(['middleware' => ['jwt.auth', 'cors',RoleMiddleware::class . ':Admin']], function () {
-    //rutas sucursales 
+// WEB ROUTES ADMIN PROTECTED
+Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.auth']], function () {
+    // Rutas de sucursales 
     Route::prefix('sucursal')->group(function () {
         Route::get('index', [SucursalController::class, 'index']);
         Route::get('show/{id}', [SucursalController::class, 'show']);
-    });    
-  });
-  
+        Route::post('store', [SucursalController::class, 'store']);
+        Route::post('update/{id}', [SucursalController::class, 'update']);
+        Route::delete('delete/{id}', [SucursalController::class, 'destroy']);
+    });
+});

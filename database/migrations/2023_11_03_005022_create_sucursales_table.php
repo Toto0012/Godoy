@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sucursales', function (Blueprint $table) {
             $table->id();
             $table->char('nombre',60);
-            $table->string('domicilio',255);
+            $table->string('direccion',255);
             $table->char('telefono',15);
             $table->timestamps();
         });
