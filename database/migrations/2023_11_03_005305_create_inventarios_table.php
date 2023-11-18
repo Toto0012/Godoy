@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('inventarios', function (Blueprint $table) {
             $table->id();
-            $table->char('nombre',35);
+            $table->string('nombre');
             $table->decimal('habia',7,2);
             $table->decimal('entro',7,2);
             $table->decimal('quedo',7,2);

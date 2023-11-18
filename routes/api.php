@@ -15,8 +15,9 @@ use Spatie\Permission\Middlewares\RoleMiddleware;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::group(['middleware' => ['jwt.auth', 'cors',RoleMiddleware::class . ':Admin']], function () {
+Route::group(['middleware' => ['jwt.auth',RoleMiddleware::class . ':Admin']], function () {
     Route::post('register', [AuthController::class, 'register'])->name('register');
+    Route::get('index', [AuthController::class, 'index'])->name('index');
 });
 
 Route::group(['middleware' => ['api', 'cors'], 'prefix' => 'auth'], function () {

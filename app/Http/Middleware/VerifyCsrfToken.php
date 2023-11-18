@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'http://127.0.0.1:8000/sucursal/store',
-        'http://127.0.0.1:8000/inventario/store'
+        'http://127.0.0.1:8000/inventario/store',
+        'http://127.0.0.1:8000/producto/store'
     ];
 }

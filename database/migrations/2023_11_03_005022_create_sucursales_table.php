@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('sucursales', function (Blueprint $table) {
             $table->id();
-            $table->char('nombre',60);
-            $table->string('direccion',255);
+            $table->string('nombre');
+            $table->string('direccion');
             $table->char('telefono',15);
             $table->timestamps();
         });

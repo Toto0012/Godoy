@@ -111,4 +111,10 @@ class AuthController extends Controller
     {
         $user->assignRole('mesero');
     }
+
+    public function index(){
+        $data = User::all();
+
+        return response()->json(["data" => $data]);
+    }
 }

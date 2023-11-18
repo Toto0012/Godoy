@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Inventario;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
-class InventarioController extends Controller
+class ProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Inventario::all();
+        $data = Producto::all();
 
         return response()->json(['data' => $data]);
     }
@@ -22,18 +22,12 @@ class InventarioController extends Controller
      */
     public function store(Request $request)
     {
-        $data = Inventario::create([
+        $data = Producto::create([
             'nombre' => $request->nombre,
-            'habia' => $request->habia,
-            'entro' => $request->entro,
-            'quedo' => $request->quedo,
-            'gasto' => $request->gasto,
-            'precio' => $request->precio,
-            'fecha' => $request->fecha,
-            'sucursal_id' => $request->sucursal_id,
+            'precio_unitario' => $request->precio_unitario,
         ]);
 
-        return response()->json(['data:' => $data]);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -41,8 +35,9 @@ class InventarioController extends Controller
      */
     public function show(string $id)
     {
-        $data = Inventario::findOrFail($id);
-        return response()->json(['data: ' => $data]);
+        $data = Producto::findOrFail($id);
+
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -50,22 +45,20 @@ class InventarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = Inventario::findOrFail($id);
+        $data = Producto::findOrFail($id);
 
         $data->update($request->all());
 
         return response()->json(['data' => $data]);
     }
 
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $data = Inventario::findOrFail($id)->delete();
+        $data = Producto::findOrFail($id)->delete();
 
         return response()->json(['data eliminada' => $data]);
     }
 }
-

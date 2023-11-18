@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InventarioController;
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\SucursalController;
 use App\Models\Inventario;
 use Illuminate\Support\Facades\Route;
@@ -36,5 +37,13 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
         Route::post('store', [InventarioController::class, 'store']);
         Route::post('update/{id}', [InventarioController::class, 'update']);
         Route::delete('delete/{id}', [InventarioController::class, 'destroy']);
+    });
+
+    Route::prefix('producto')->group(function () {
+        Route::get('index', [ProductoController::class, 'index']);
+        Route::get('show/{id}', [ProductoController::class, 'show']);
+        Route::post('store', [ProductoController::class, 'store']);
+        Route::post('update/{id}', [ProductoController::class, 'update']);
+        Route::delete('delete/{id}', [ProductoController::class, 'destroy']);
     });
 });

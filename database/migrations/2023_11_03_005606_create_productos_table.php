@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->char('nombre',35);
+            $table->string('nombre');
             $table->smallInteger('precio_unitario');
             $table->timestamps();
         });

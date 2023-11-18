@@ -24,7 +24,7 @@ class SucursalRequest extends FormRequest
         return [
             'nombre' => 'required|string|max:255|min:4',
             'direccion' => 'required|string|max:255',
-            'telefono' => 'required|string|min:10',
+            'telefono' => 'required|string|min:10|max:15',
         ];
     }
 }

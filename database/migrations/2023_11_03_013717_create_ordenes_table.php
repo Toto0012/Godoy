@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('users');
             $table->date('fecha');
-            $table->char('estatus',10);
-            $table->char('mesa',1);
+            $table->string('estatus');
+            $table->smallInteger('mesa');
             $table->timestamps();
         });
     }
