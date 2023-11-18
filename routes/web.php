@@ -26,4 +26,13 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
         Route::post('update/{id}', [SucursalController::class, 'update']);
         Route::delete('delete/{id}', [SucursalController::class, 'destroy']);
     });
+
+    //Rutas de Inventario
+    Route::prefix('inventario')->group(function () {
+        Route::get('index', [SucursalController::class, 'index']);
+        Route::get('show/{id}', [SucursalController::class, 'show']);
+        Route::post('store', [SucursalController::class, 'store']);
+        Route::post('update/{id}', [SucursalController::class, 'update']);
+        Route::delete('delete/{id}', [SucursalController::class, 'destroy']);
+    });
 });

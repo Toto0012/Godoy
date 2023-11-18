@@ -23,8 +23,6 @@ class UserRequest extends FormRequest
     {
         return [
             'nombre' => 'required',
-            'apellido_paterno' => 'required',
-            'apellido_materno' => 'required',
             'telefono' => 'required',
             'domicilio' => 'required',
             'email' => 'required|email|max:255|unique:users',
