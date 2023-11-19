@@ -17,5 +17,25 @@ class ProductoSeeder extends Seeder
             'nombre' => 'Coca-cola',
             'precio_unitario' => 20
         ]);
+
+        Producto::create([
+            'nombre' => 'Taco',
+            'precio_unitario' => 20
+        ]);
+
+        Producto::create([
+            'nombre' => 'Quesadilla',
+            'precio_unitario' => 20
+        ]);
+
+        Producto::create([
+            'nombre' => 'Vampiro',
+            'precio_unitario' => 20
+        ]);
+
+        Producto::create([
+            'nombre' => 'Fanta',
+            'precio_unitario' => 20
+        ]);
     }
 }

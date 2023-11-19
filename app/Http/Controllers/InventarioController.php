@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Inventario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InventarioController extends Controller
 {
@@ -12,9 +13,9 @@ class InventarioController extends Controller
      */
     public function index()
     {
-        $data = Inventario::all();
+        $registros = DB::select('EXEC get_inventario');
 
-        return response()->json(['data' => $data]);
+        return response()->json(['data' => $registros]);
     }
 
     /**
