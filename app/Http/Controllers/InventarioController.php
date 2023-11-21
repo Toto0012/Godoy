@@ -11,11 +11,11 @@ class InventarioController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $registros = DB::select('EXEC get_inventario');
-
-        return response()->json(['data' => $registros]);
+        $data = Inventario::select('id','nombre','habia','entro','quedo','gasto','precio')
+        ->where('fecha','=',$request->fecha)->get();
+        return response()->json(['data:' => $data]);
     }
 
     /**
@@ -52,10 +52,15 @@ class InventarioController extends Controller
     public function update(Request $request, string $id)
     {
         $data = Inventario::findOrFail($id);
-
-        $data->update($request->all());
-
-        return response()->json(['data' => $data]);
+        $gasto = $data['habia'] + $data['entro'] - $data['quedo'];
+        $data->update([
+            'habia' => $request['habia'],
+            'entro' => $request['entro'],
+            'quedo' => $request['quedo'],
+            'gasto' => $gasto
+        ]);
+        return response()->json(['mensaje' => 'Datos actualizados con exito']);
+        //return response()->json(['data' => $data]);
     }
 
 

@@ -32,7 +32,7 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
 
     //Rutas de Inventario
     Route::prefix('inventario')->group(function () {
-        Route::get('index', [InventarioController::class, 'index']);
+        Route::post('index', [InventarioController::class, 'index']);
         Route::get('show/{id}', [InventarioController::class, 'show']);
         Route::post('store', [InventarioController::class, 'store']);
         Route::post('update/{id}', [InventarioController::class, 'update']);
