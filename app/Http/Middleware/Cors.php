@@ -21,6 +21,6 @@ class Cors
         //Métodos que a los que se da acceso
         ->header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
         //Headers de la petición
-        ->header("Access-Control-Allow-Headers", "Content-Type, X-Token-Auth, Authorization");
+        ->header("Access-Control-Allow-Headers", "Content-Type, X-Token-Auth, Authorization, x-csrf-token");
     }
 }

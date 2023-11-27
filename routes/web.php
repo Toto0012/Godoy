@@ -46,4 +46,10 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
         Route::post('update/{id}', [ProductoController::class, 'update']);
         Route::delete('delete/{id}', [ProductoController::class, 'destroy']);
     });
+
+    Route::get('/csrf-token', function () {
+        return response()->json(['csrf_token' => csrf_token()]);
+    });
+
+    
 });
