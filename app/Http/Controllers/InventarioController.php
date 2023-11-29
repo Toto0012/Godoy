@@ -60,6 +60,7 @@ class InventarioController extends Controller
             'habia' => $request['habia'],
             'entro' => $request['entro'],
             'quedo' => $request['quedo'],
+            'precio' => $request['precio'],
             'gasto' => $gasto
         ]);
         return response()->json(['mensaje' => 'Datos actualizados con exito']);
