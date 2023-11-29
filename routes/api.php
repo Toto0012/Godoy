@@ -39,6 +39,7 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
         Route::post('store', [InventarioController::class, 'store']);
         Route::post('update/{id}', [InventarioController::class, 'update']);
         Route::delete('delete/{id}', [InventarioController::class, 'destroy']);
+        Route::post('nuevo', [InventarioController::class, 'nuevoInventario']);
     });
 
         // Rutas de sucursales 

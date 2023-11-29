@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Inventario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class InventarioController extends Controller
 {
@@ -74,6 +75,28 @@ class InventarioController extends Controller
         $data = Inventario::findOrFail($id)->delete();
 
         return response()->json(['data eliminada' => $data]);
+    }
+
+    public function nuevoInventario(Request $request){
+        $fechaActual = $request->fecha;
+        $data = Inventario::select('nombre','quedo','sucursal_id','precio')->where('fecha','=',$fechaActual)->get();
+        $fechaActual = Carbon::parse($fechaActual);
+        $fechaSiguiente = $fechaActual->addDay();
+        $fechaSiguiente = $fechaSiguiente->format('Y-m-d');
+        foreach ($data as $dato) {
+        Inventario::create([
+            'nombre' => $dato->nombre,
+            'habia' => $dato->quedo,
+            'entro' => 0.0,
+            'quedo' => 0.0,
+            'gasto' => 0.0,
+            'precio' => $dato->precio,
+            'fecha' => $fechaSiguiente,
+            'sucursal_id' => $dato->sucursal_id,
+        ]);
+    }
+        return response()->json(['mensaje:' => 'Inventario Finalizado']);
+
     }
 }
 
