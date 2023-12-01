@@ -14,14 +14,14 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasRoles;
     use HasApiTokens, HasFactory, Notifiable;
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $table = 'users';
-    
+
     protected $fillable = [
         'nombre',
         'email',
@@ -64,6 +64,6 @@ class User extends Authenticatable implements JWTSubject
      */
     public function getJWTCustomClaims()
     {
-        return [];
+        return ['rol' => $this->rol,];
     }
 }

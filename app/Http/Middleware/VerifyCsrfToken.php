@@ -16,6 +16,7 @@ class VerifyCsrfToken extends Middleware
         'http://127.0.0.1:8000/inventario/store',
         'http://127.0.0.1:8000/producto/store',
         'http://127.0.0.1:8000/inventario/index',
+        '/inventario/index',
         'http://127.0.0.1:8000/inventario/update/2'
     ];
 }
