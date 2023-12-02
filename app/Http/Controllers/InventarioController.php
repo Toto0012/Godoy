@@ -52,14 +52,18 @@ class InventarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $data = Inventario::findOrFail($id);
-        $gasto = $data['habia'] + $data['entro'] - $data['quedo'];
+        $data = Inventario::findOrFail($id);       
         $data->update([
             'habia' => $request['habia'],
             'entro' => $request['entro'],
             'quedo' => $request['quedo'],
-            'precio' => $request['precio'],
-            'gasto' => $gasto
+            'precio' => $request['precio']
+            
+        ]);
+        $data = Inventario::findOrFail($id);
+        $gasto = $data['habia'] + $data['entro'] - $data['quedo'];
+        $data->update([
+            'gasto' => $gasto         
         ]);
         return response()->json(['mensaje' => 'Datos actualizados con exito']);
         //return response()->json(['data' => $data]);
