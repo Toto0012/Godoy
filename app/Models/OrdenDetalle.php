@@ -17,10 +17,13 @@ class OrdenDetalle extends Model
     protected $table = 'ordenes_detalles';
     
     protected $fillable = [
+        'id_producto',
+        'id_orden',
+        'platillo',
         'precio_unitario',
         'cantidad',
         'total',
-        'descuento',
+        'descripcion',
     ];
 
     /**

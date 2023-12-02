@@ -17,6 +17,7 @@ class Orden extends Model
     protected $table = 'ordenes';
 
     protected $fillable = [
+        'id_usuario',
         'fecha',
         'estatus',
         'mesa',

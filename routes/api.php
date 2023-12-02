@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InventarioController;
+use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\OrdenDetalleController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\SucursalController;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +61,22 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
             Route::post('store', [ProductoController::class, 'store']);
             Route::post('update/{id}', [ProductoController::class, 'update']);
             Route::delete('delete/{id}', [ProductoController::class, 'destroy']);
+        });
+
+        Route::prefix('orden')->group(function () {
+            Route::get('index', [OrdenController::class, 'index']);
+            Route::get('show/{id}', [OrdenController::class, 'show']);
+            Route::post('store', [OrdenController::class, 'store']);
+            Route::post('update/{id}', [OrdenController::class, 'update']);
+            Route::delete('delete/{id}', [OrdenController::class, 'destroy']);
+        });
+
+        Route::prefix('orden_detalle')->group(function () {
+            Route::get('index', [OrdenDetalleController::class, 'index']);
+            Route::get('show/{id}', [OrdenDetalleController::class, 'show']);
+            Route::post('store', [OrdenDetalleController::class, 'store']);
+            Route::post('update/{id}', [OrdenDetalleController::class, 'update']);
+            Route::delete('delete/{id}', [OrdenDetalleController::class, 'destroy']);
         });
     
 });
