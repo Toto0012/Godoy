@@ -14,14 +14,22 @@ class procedures extends Migration
     {
         // Crear procedimiento almacenado
         $procedure = "
-        CREATE PROCEDURE get_inventario
-        @FechaConsulta DATE
+        
+    create PROCEDURE get_cuenta @orden INT
     AS
     BEGIN
-        SELECT *
-        FROM inventarios
-        WHERE CONVERT(DATE, Fecha) = @FechaConsulta;
-    END;
+        DECLARE @suma_total MONEY;
+
+        SELECT @suma_total = SUM(od.total)
+        FROM ordenes_detalles od
+        WHERE od.id_orden = @orden;
+
+        SELECT od.id_orden, od.id_producto, p.nombre, od.cantidad, od.total AS precio, @suma_total AS total
+        FROM ordenes_detalles od
+        INNER JOIN productos p ON od.id_producto = p.id
+        WHERE od.id_orden = @orden;
+    END
+
     
         ";
 
@@ -36,6 +44,6 @@ class procedures extends Migration
     public function down()
     {
         // Elimina el procedimiento almacenado si es necesario
-        DB::unprepared('DROP PROCEDURE IF EXISTS get_inventario');
+        DB::unprepared('DROP PROCEDURE IF EXISTS get_cuenta');
     }
 }

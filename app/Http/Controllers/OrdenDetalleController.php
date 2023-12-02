@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\OrdenDetalle;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrdenDetalleController extends Controller
 {
@@ -20,7 +21,7 @@ class OrdenDetalleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-     public function store(Request $request)
+    public function store(Request $request)
     {
         $json = $request->json()->all();
 
@@ -70,5 +71,12 @@ class OrdenDetalleController extends Controller
         $data = OrdenDetalle::findOrFail($id)->delete();
 
         return response()->json(['data' => $data]);
+    }
+
+    public function cuenta(Request $request){
+        
+        $data = DB::select('EXEC get_cuenta ?', [$request->orden]);
+        
+        return response()->json(['data:' => $data]);
     }
 }

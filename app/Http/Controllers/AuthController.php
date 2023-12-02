@@ -47,8 +47,9 @@ class AuthController extends Controller
     {
         $user = auth()->user();
         $rol = auth()->payload()->get('rol');
+        $id = auth()->payload()->get('id');
 
-        return response()->json(['user' => $user, 'rol' => $rol]);
+        return response()->json(['user' => $user, 'rol' => $rol, 'id' => $id]);
     }
 
 
@@ -86,7 +87,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 60,
         ]);
     }
 
@@ -103,9 +104,9 @@ class AuthController extends Controller
             'id_sucursal' => $request->id_sucursal
         ]);
 
-        if(!$request->rol){
+        if (!$request->rol) {
             $this->assignDefaultRole($user);
-        }else{
+        } else {
             $user->assignRole($request->rol);
         }
         return response()->json(['usuario' => $user], 200);
@@ -116,7 +117,8 @@ class AuthController extends Controller
         $user->assignRole('mesero');
     }
 
-    public function index(){
+    public function index()
+    {
         $data = User::all();
 
         return response()->json(["data" => $data]);
