@@ -26,6 +26,7 @@ class ProductoController extends Controller
         $data = Producto::create([
             'nombre' => $request->nombre,
             'precio_unitario' => $request->precio_unitario,
+            'tipo' => $request->tipo
         ]);
 
         return response()->json(['data' => $data]);
@@ -61,5 +62,10 @@ class ProductoController extends Controller
         $data = Producto::findOrFail($id)->delete();
 
         return response()->json(['data eliminada' => $data]);
+    }
+
+    public function productoTipo(){
+       $data = Producto::Select('tipo')->distinct()->get();
+       return response()->json(['data' => $data]);
     }
 }

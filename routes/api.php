@@ -61,6 +61,7 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
             Route::post('store', [ProductoController::class, 'store']);
             Route::post('update/{id}', [ProductoController::class, 'update']);
             Route::delete('delete/{id}', [ProductoController::class, 'destroy']);
+            Route::get('productoTipo', [ProductoController::class, 'productoTipo']);
         });
 
         Route::prefix('orden')->group(function () {
