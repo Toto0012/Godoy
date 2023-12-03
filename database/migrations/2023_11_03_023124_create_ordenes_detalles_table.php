@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('id_producto')->references('id')->on('productos');
             $table->unsignedBigInteger('id_orden');
             $table->foreign('id_orden')->references('id')->on('ordenes');
+            $table->smallInteger('mesa');
             $table->smallInteger('platillo');
             $table->smallInteger('precio_unitario');
             $table->smallInteger('cantidad');

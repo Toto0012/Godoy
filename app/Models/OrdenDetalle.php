@@ -19,6 +19,7 @@ class OrdenDetalle extends Model
     protected $fillable = [
         'id_producto',
         'id_orden',
+        'mesa',
         'platillo',
         'precio_unitario',
         'cantidad',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrdenDetalleRequest;
 use App\Models\OrdenDetalle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +32,7 @@ class OrdenDetalleController extends Controller
             $data[] = OrdenDetalle::create([
                 "id_producto" => $orden['id_producto'],
                 "id_orden" => $orden['id_orden'],
+                "mesa" => $orden['mesa'],
                 "platillo" => $orden['platillo'],
                 "precio_unitario" => $orden['precio_unitario'],
                 "cantidad" => $orden['cantidad'],
@@ -73,9 +75,16 @@ class OrdenDetalleController extends Controller
         return response()->json(['data' => $data]);
     }
 
-    public function cuenta(Request $request){
+    public function get_cuenta(Request $request){
         
         $data = DB::select('EXEC get_cuenta ?', [$request->orden]);
+        
+        return response()->json(['data:' => $data]);
+    }
+
+    public function get_ordenes(){
+        
+        $data = DB::select('EXEC get_ordenes');
         
         return response()->json(['data:' => $data]);
     }

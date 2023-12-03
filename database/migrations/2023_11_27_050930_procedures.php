@@ -15,7 +15,7 @@ class procedures extends Migration
         // Crear procedimiento almacenado
         $procedure = "
         
-    create PROCEDURE get_cuenta @orden INT
+    CREATE PROCEDURE get_cuenta @orden INT
     AS
     BEGIN
         DECLARE @suma_total MONEY;
@@ -29,11 +29,23 @@ class procedures extends Migration
         INNER JOIN productos p ON od.id_producto = p.id
         WHERE od.id_orden = @orden;
     END
-
-    
         ";
 
+    $procedure2 = "
+    CREATE PROC get_ordenes
+    AS
+    BEGIN
+        SELECT p.nombre, od.mesa, od.platillo, od.cantidad, o.estatus
+        FROM ordenes_detalles od
+        INNER JOIN ordenes o ON o.id = od.id_orden
+        INNER JOIN productos p ON p.id = od.id_producto
+        WHERE o.estatus = 'Activo' OR o.estatus = 'Servido' AND p.nombre NOT LIKE '%Coca%' AND p.nombre NOT LIKE '%Agua%'
+            AND CONVERT(DATE, o.fecha) = CONVERT(DATE, GETDATE());
+    END
+        "; 
+
         DB::unprepared($procedure);
+        DB::unprepared($procedure2);
     }
 
     /**
@@ -45,5 +57,6 @@ class procedures extends Migration
     {
         // Elimina el procedimiento almacenado si es necesario
         DB::unprepared('DROP PROCEDURE IF EXISTS get_cuenta');
+        DB::unprepared('DROP PROCEDURE IF EXISTS get_ordenes');
     }
 }

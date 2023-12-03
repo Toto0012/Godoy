@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductoRequest;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,9 @@ class ProductoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(ProductoRequest $request)
     {
-        $data = Producto::Select('id','nombre','tipo')
+        $data = Producto::Select('id','nombre','tipo', 'precio_unitario')
         ->where('tipo','=',$request->tipo)
         ->get();
         return response()->json(['data' => $data]);
@@ -21,7 +22,7 @@ class ProductoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductoRequest $request)
     {
         $data = Producto::create([
             'nombre' => $request->nombre,
@@ -45,7 +46,7 @@ class ProductoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductoRequest $request, string $id)
     {
         $data = Producto::findOrFail($id);
 
