@@ -11,7 +11,7 @@ class ProductoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(ProductoRequest $request)
+    public function index(Request $request)
     {
         $data = Producto::Select('id','nombre','tipo', 'precio_unitario')
         ->where('tipo','=',$request->tipo)
