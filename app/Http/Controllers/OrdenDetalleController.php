@@ -82,9 +82,16 @@ class OrdenDetalleController extends Controller
         return response()->json(['data:' => $data]);
     }
 
-    public function get_ordenes(){
+    public function get_ordenes_cocinero(){
         
-        $data = DB::select('EXEC get_ordenes');
+        $data = DB::select('EXEC get_ordenes_cocinero');
+        
+        return response()->json(['data:' => $data]);
+    }
+
+    public function get_ordenes_mesero(){
+        
+        $data = DB::select('EXEC get_ordenes_mesero');
         
         return response()->json(['data:' => $data]);
     }

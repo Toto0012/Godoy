@@ -32,20 +32,34 @@ class procedures extends Migration
         ";
 
     $procedure2 = "
-    CREATE PROC get_ordenes
+    CREATE PROC get_ordenes_cocinero
     AS
     BEGIN
         SELECT p.nombre, od.mesa, od.platillo, od.cantidad, o.estatus
         FROM ordenes_detalles od
         INNER JOIN ordenes o ON o.id = od.id_orden
         INNER JOIN productos p ON p.id = od.id_producto
-        WHERE o.estatus = 'Activo' OR o.estatus = 'Servido' AND p.nombre NOT LIKE '%Coca%' AND p.nombre NOT LIKE '%Agua%'
+        WHERE (o.estatus = 'Activo' OR o.estatus = 'Servido') AND p.nombre NOT LIKE '%Coca%' AND p.nombre NOT LIKE '%Agua%'
             AND CONVERT(DATE, o.fecha) = CONVERT(DATE, GETDATE());
     END
         "; 
 
+        $procedure3 = "
+    CREATE PROC get_ordenes_mesero
+    AS
+    BEGIN
+        SELECT p.nombre, od.mesa, od.platillo, od.cantidad, o.estatus
+        FROM ordenes_detalles od
+        INNER JOIN ordenes o ON o.id = od.id_orden
+        INNER JOIN productos p ON p.id = od.id_producto
+        WHERE (o.estatus = 'Activo' OR o.estatus = 'Servido') AND CONVERT(DATE, o.fecha) = CONVERT(DATE, GETDATE());
+    END
+        "; 
+        
+
         DB::unprepared($procedure);
         DB::unprepared($procedure2);
+        DB::unprepared($procedure3);
     }
 
     /**
@@ -57,6 +71,6 @@ class procedures extends Migration
     {
         // Elimina el procedimiento almacenado si es necesario
         DB::unprepared('DROP PROCEDURE IF EXISTS get_cuenta');
-        DB::unprepared('DROP PROCEDURE IF EXISTS get_ordenes');
+        DB::unprepared('DROP PROCEDURE IF EXISTS get_ordenes_cocinero');
     }
 }

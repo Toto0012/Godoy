@@ -79,7 +79,8 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
             Route::post('update/{id}', [OrdenDetalleController::class, 'update']);
             Route::delete('delete/{id}', [OrdenDetalleController::class, 'destroy']);
             Route::post('cuenta', [OrdenDetalleController::class, 'get_cuenta']);
-            Route::get('ordenes_cocina', [OrdenDetalleController::class, 'get_ordenes']);
+            Route::get('ordenes_cocinero', [OrdenDetalleController::class, 'get_ordenes_cocinero']);
+            Route::get('ordenes_mesero', [OrdenDetalleController::class, 'get_ordenes_mesero']);
         });
     
 });
