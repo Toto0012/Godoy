@@ -16,7 +16,7 @@ class InventarioController extends Controller
     {
         $data = Inventario::select('id','nombre','habia','entro','quedo','gasto','precio')
         ->where('fecha','=',$request->fecha)->get();
-
+        return response()->json(['data:' => $data]);
     }
 
     /**

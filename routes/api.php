@@ -56,7 +56,7 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
 
         //ruta de productos
         Route::prefix('producto')->group(function () {
-            Route::get('index', [ProductoController::class, 'index']);
+            Route::post('index', [ProductoController::class, 'index']);
             Route::get('show/{id}', [ProductoController::class, 'show']);
             Route::post('store', [ProductoController::class, 'store']);
             Route::post('update/{id}', [ProductoController::class, 'update']);

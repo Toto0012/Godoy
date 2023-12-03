@@ -10,10 +10,11 @@ class ProductoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Producto::all();
-
+        $data = Producto::Select('id','nombre','tipo')
+        ->where('tipo','=',$request->tipo)
+        ->get();
         return response()->json(['data' => $data]);
     }
 

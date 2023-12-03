@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre')->unique();
             $table->smallInteger('precio_unitario');
-            $table->string('Tipo');
+            $table->string('tipo');
             $table->timestamps();
         });
     }
