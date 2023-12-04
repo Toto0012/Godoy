@@ -72,5 +72,6 @@ class procedures extends Migration
         // Elimina el procedimiento almacenado si es necesario
         DB::unprepared('DROP PROCEDURE IF EXISTS get_cuenta');
         DB::unprepared('DROP PROCEDURE IF EXISTS get_ordenes_cocinero');
+        DB::unprepared('DROP PROCEDURE IF EXISTS get_ordenes_mesero');
     }
 }
