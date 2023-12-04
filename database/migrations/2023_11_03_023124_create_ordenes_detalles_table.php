@@ -22,7 +22,7 @@ return new class extends Migration
             $table->smallInteger('precio_unitario');
             $table->smallInteger('cantidad');
             $table->smallInteger('total');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->timestamps();
         });
     }
