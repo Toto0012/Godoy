@@ -33,9 +33,7 @@ Route::group(['middleware' => ['api', 'cors'], 'prefix' => 'auth'], function () 
 });
 
 //Rutas de consumo api rest
-
-Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.auth']], function () {
-    Route::prefix('inventario')->group(function () {
+    Route::prefix('inventario')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin'])->group(function () {
         Route::post('index', [InventarioController::class, 'index']);
         Route::get('show/{id}', [InventarioController::class, 'show']);
         Route::post('store', [InventarioController::class, 'store']);
@@ -45,7 +43,7 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
     });
 
         // Rutas de sucursales 
-        Route::prefix('sucursal')->group(function () {
+        Route::prefix('sucursal')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin'])->group(function () {
             Route::get('index', [SucursalController::class, 'index']);
             Route::get('show/{id}', [SucursalController::class, 'show']);
             Route::post('store', [SucursalController::class, 'store']);
@@ -55,7 +53,7 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
 
 
         //ruta de productos
-        Route::prefix('producto')->group(function () {
+        Route::prefix('producto')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin'])->group(function () {
             Route::post('index', [ProductoController::class, 'index']);
             Route::get('show/{id}', [ProductoController::class, 'show']);
             Route::post('store', [ProductoController::class, 'store']);
@@ -64,7 +62,7 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
             Route::get('productoTipo', [ProductoController::class, 'productoTipo']);
         });
 
-        Route::prefix('orden')->group(function () {
+        Route::prefix('orden')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin,Mesero'])->group(function () {
             Route::get('index', [OrdenController::class, 'index']);
             Route::get('show/{id}', [OrdenController::class, 'show']);
             Route::post('store', [OrdenController::class, 'store']);
@@ -72,27 +70,7 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
             Route::delete('delete/{id}', [OrdenController::class, 'destroy']);
         });
 
-        Route::prefix('orden_detalle')->group(function () {
-            Route::get('index', [OrdenDetalleController::class, 'index']);
-            Route::get('show/{id}', [OrdenDetalleController::class, 'show']);
-            Route::post('store', [OrdenDetalleController::class, 'store']);
-            Route::post('update/{id}', [OrdenDetalleController::class, 'update']);
-            Route::delete('delete/{id}', [OrdenDetalleController::class, 'destroy']);
-            Route::post('cuenta', [OrdenDetalleController::class, 'get_cuenta']);
-            Route::get('ordenes_cocinero', [OrdenDetalleController::class, 'get_ordenes_cocinero']);
-            Route::get('ordenes_mesero', [OrdenDetalleController::class, 'get_ordenes_mesero']);
-        });
-    
-    Route::group(['middleware' => ['cors', 'role:Mesero', 'jwt.auth']], function () {
-        Route::prefix('orden')->group(function () {
-            Route::get('index', [OrdenController::class, 'index']);
-            Route::get('show/{id}', [OrdenController::class, 'show']);
-            Route::post('store', [OrdenController::class, 'store']);
-            Route::post('update/{id}', [OrdenController::class, 'update']);
-            Route::delete('delete/{id}', [OrdenController::class, 'destroy']);
-        });
-
-        Route::prefix('orden_detalle')->group(function () {
+        Route::prefix('orden_detalle')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin,Mesero'])->group(function () {
             Route::get('index', [OrdenDetalleController::class, 'index']);
             Route::get('show/{id}', [OrdenDetalleController::class, 'show']);
             Route::post('store', [OrdenDetalleController::class, 'store']);
@@ -103,9 +81,3 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
             Route::get('ordenes_mesero', [OrdenDetalleController::class, 'get_ordenes_mesero']);
         });
 
-    });
-
-    Route::group(['middleware' => ['cors', 'role:Cocina', 'jwt.auth']], function () {
-        Route::get('ordenes_cocinero', [OrdenDetalleController::class, 'get_ordenes_cocinero']);
-    });
-});
