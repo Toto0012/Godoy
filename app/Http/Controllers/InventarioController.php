@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InventarioRequest;
 use App\Models\Inventario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,7 +23,7 @@ class InventarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(InventarioRequest $request)
     {
         $data = Inventario::create([
             'nombre' => $request->nombre,
@@ -50,7 +51,7 @@ class InventarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(InventarioRequest $request, string $id)
     {
         $data = Inventario::findOrFail($id);       
         $data->update([

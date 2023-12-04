@@ -22,12 +22,12 @@ class InventarioRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => 'required|max:255|min:4',
-            'habia' => 'required',
-            'entro' => 'required',
-            'quedo' => 'required',
-            'gasto' => 'required',
-            'precio' => 'required',
+            'nombre' => 'required|string|max:255|min:4',
+            'habia' => 'required|decimal|min:0',
+            'entro' => 'required|decimal|min:0',
+            'quedo' => 'required|decimal|min:0',
+            'gasto' => 'required|decimal|min:0',
+            'precio' => 'required|decimal|min:0',
             'fecha' => 'required',
         ];
     }
