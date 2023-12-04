@@ -83,4 +83,29 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
             Route::get('ordenes_mesero', [OrdenDetalleController::class, 'get_ordenes_mesero']);
         });
     
+    Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Mesero', 'jwt.auth']], function () {
+        Route::prefix('orden')->group(function () {
+            Route::get('index', [OrdenController::class, 'index']);
+            Route::get('show/{id}', [OrdenController::class, 'show']);
+            Route::post('store', [OrdenController::class, 'store']);
+            Route::post('update/{id}', [OrdenController::class, 'update']);
+            Route::delete('delete/{id}', [OrdenController::class, 'destroy']);
+        });
+
+        Route::prefix('orden_detalle')->group(function () {
+            Route::get('index', [OrdenDetalleController::class, 'index']);
+            Route::get('show/{id}', [OrdenDetalleController::class, 'show']);
+            Route::post('store', [OrdenDetalleController::class, 'store']);
+            Route::post('update/{id}', [OrdenDetalleController::class, 'update']);
+            Route::delete('delete/{id}', [OrdenDetalleController::class, 'destroy']);
+            Route::post('cuenta', [OrdenDetalleController::class, 'get_cuenta']);
+            Route::get('ordenes_cocinero', [OrdenDetalleController::class, 'get_ordenes_cocinero']);
+            Route::get('ordenes_mesero', [OrdenDetalleController::class, 'get_ordenes_mesero']);
+        });
+
+    });
+
+    Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Mesero', 'jwt.auth']], function () {
+        Route::get('ordenes_cocinero', [OrdenDetalleController::class, 'get_ordenes_cocinero']);
+    });
 });
