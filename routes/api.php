@@ -83,7 +83,7 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
             Route::get('ordenes_mesero', [OrdenDetalleController::class, 'get_ordenes_mesero']);
         });
     
-    Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Mesero', 'jwt.auth']], function () {
+    Route::group(['middleware' => ['cors', 'role:Mesero', 'jwt.auth']], function () {
         Route::prefix('orden')->group(function () {
             Route::get('index', [OrdenController::class, 'index']);
             Route::get('show/{id}', [OrdenController::class, 'show']);
@@ -105,7 +105,7 @@ Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Admin', 'jwt.au
 
     });
 
-    Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Mesero', 'jwt.auth']], function () {
+    Route::group(['middleware' => ['cors', 'role:Cocina', 'jwt.auth']], function () {
         Route::get('ordenes_cocinero', [OrdenDetalleController::class, 'get_ordenes_cocinero']);
     });
 });
