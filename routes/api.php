@@ -79,6 +79,7 @@ Route::group(['middleware' => ['api', 'cors'], 'prefix' => 'auth'], function () 
             Route::post('cuenta', [OrdenDetalleController::class, 'get_cuenta']);
             Route::get('ordenes_cocinero', [OrdenDetalleController::class, 'get_ordenes_cocinero']);
             Route::get('ordenes_mesero', [OrdenDetalleController::class, 'get_ordenes_mesero']);
+            Route::get('servido', [OrdenDetalleController::class, 'servido']);
         });
 
 /* Route::group(['middleware' => ['cors', RoleMiddleware::class . ':Mesero', 'jwt.auth']], function () {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrdenDetalleRequest;
+use App\Models\Orden;
 use App\Models\OrdenDetalle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -93,6 +94,15 @@ class OrdenDetalleController extends Controller
         
         $data = DB::select('EXEC get_ordenes_mesero');
         
+        return response()->json(['data:' => $data]);
+    }
+
+    public function servido(Request $request, string $id){
+        
+        $data = Orden::findOrFail($id);
+
+        $data->update(['estatus' => $request->estatus]);
+
         return response()->json(['data:' => $data]);
     }
 }
