@@ -53,7 +53,7 @@ Route::group(['middleware' => ['api', 'cors'], 'prefix' => 'auth'], function () 
 
 
         //ruta de productos
-        Route::prefix('producto')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin|Mesero'])->group(function () {
+        Route::prefix('producto')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin|Mesero|Encargado'])->group(function () {
             Route::post('index', [ProductoController::class, 'index']);
             Route::get('show/{id}', [ProductoController::class, 'show']);
             Route::post('store', [ProductoController::class, 'store']);
