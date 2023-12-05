@@ -22,12 +22,14 @@ class OrdenDetalleRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id_producto' => 'required|integer|min:1',
+            'id_orden' => 'required|integer|min:1',
             'mesa' => 'required|integer|min:1',
-            'platillo' => 'required|integer|max:255',
+            'platillo' => 'required|integer|min:1',
             'precio_unitario' => 'required|integer|min:1',
             'cantidad' => 'required|integer|min:1',
             'total' => '',
-            'descripcion' => 'string|max:255'
+            'descripcion' => ''
         ];
     }
 }
