@@ -78,11 +78,11 @@ class OrdenDetalleController extends Controller
     public function get_cuenta(Request $request){
 
         $dataO = Orden::findOrFail($request->orden);
-        
-        $data = DB::select('EXEC get_cuenta ?', [$request->orden]);
 
         $dataO->update(['estatus' => "Terminado"]);
         
+        $data = DB::select('EXEC get_cuenta ?', [$request->orden]);
+
         return response()->json(['data:' => $data]);
 
 

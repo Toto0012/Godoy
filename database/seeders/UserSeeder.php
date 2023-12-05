@@ -23,5 +23,24 @@ class UserSeeder extends Seeder
             'id_sucursal' => 1
         ])->assignRole('Admin');
 
+        User::create([
+            'nombre' => 'Cristian Alejandro Romero Villalobos',
+            'email' => 'tamalito@email.com',
+            'password' => bcrypt('12345678'),
+            'telefono' => "6671261616",
+            'domicilio' => "Prados",
+            'rol' => "Cocina",
+            'id_sucursal' => 1
+        ])->assignRole('Cocina');
+
+        User::create([
+            'nombre' => 'Hector Manuel Lara Ibarra',
+            'email' => 'BT@email.com',
+            'password' => bcrypt('12345678'),
+            'telefono' => "6671261616",
+            'domicilio' => "Prados",
+            'rol' => "Mesero",
+            'id_sucursal' => 1
+        ])->assignRole('Mesero');
     }
 }
