@@ -33,7 +33,7 @@ Route::group(['middleware' => ['api', 'cors'], 'prefix' => 'auth'], function () 
 });
 
 //Rutas de consumo api rest
-    Route::prefix('inventario')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin'])->group(function () {
+    Route::prefix('inventario')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin|Encargado'])->group(function () {
         Route::post('index', [InventarioController::class, 'index']);
         Route::get('show/{id}', [InventarioController::class, 'show']);
         Route::post('store', [InventarioController::class, 'store']);
@@ -62,7 +62,7 @@ Route::group(['middleware' => ['api', 'cors'], 'prefix' => 'auth'], function () 
             Route::get('productoTipo', [ProductoController::class, 'productoTipo']);
         });
 
-        Route::prefix('orden')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin|Mesero'])->group(function () {
+        Route::prefix('orden')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin|Mesero|Encargado'])->group(function () {
             Route::get('index', [OrdenController::class, 'index']);
             Route::get('show/{id}', [OrdenController::class, 'show']);
             Route::post('store', [OrdenController::class, 'store']);
@@ -70,7 +70,7 @@ Route::group(['middleware' => ['api', 'cors'], 'prefix' => 'auth'], function () 
             Route::delete('delete/{id}', [OrdenController::class, 'destroy']);
         });
 
-        Route::prefix('orden_detalle')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin|Mesero|Cocina'])->group(function () {
+        Route::prefix('orden_detalle')->middleware(['jwt.auth', RoleMiddleware::class . ':Admin|Mesero|Cocina|Encargado'])->group(function () {
             Route::get('index', [OrdenDetalleController::class, 'index']);
             Route::get('show/{id}', [OrdenDetalleController::class, 'show']);
             Route::post('store', [OrdenDetalleController::class, 'store']);

@@ -42,5 +42,15 @@ class UserSeeder extends Seeder
             'rol' => "Mesero",
             'id_sucursal' => 1
         ])->assignRole('Mesero');
+    
+        User::create([
+            'nombre' => 'Carlos Alejandro Cebreros',
+            'email' => 'CarlosA@email.com',
+            'password' => bcrypt('12345678'),
+            'telefono' => "6671261616",
+            'domicilio' => "Prados",
+            'rol' => "Encargado",
+            'id_sucursal' => 1
+        ])->assignRole('Encargado');
     }
 }
