@@ -23,7 +23,7 @@ class OrdenDetalleRequest extends FormRequest
     {
         return [
             'mesa' => 'required|integer|min:1',
-            'platillo' => 'required|string|max:255',
+            'platillo' => 'required|integer|max:255',
             'precio_unitario' => 'required|integer|min:1',
             'cantidad' => 'required|integer|min:1',
             'total' => '',
