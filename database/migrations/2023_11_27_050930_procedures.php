@@ -35,11 +35,11 @@ class procedures extends Migration
     CREATE PROC get_ordenes_cocinero
     AS
     BEGIN
-        SELECT p.nombre, od.mesa, od.platillo, od.cantidad, o.estatus, od.descripcion
+        SELECT o.id, p.nombre, ,od.mesa, od.platillo, od.cantidad, o.estatus, od.descripcion
         FROM ordenes_detalles od
         INNER JOIN ordenes o ON o.id = od.id_orden
         INNER JOIN productos p ON p.id = od.id_producto
-        WHERE (o.estatus = 'Activo' OR o.estatus = 'Servido') AND p.nombre NOT LIKE '%Coca%' AND p.nombre NOT LIKE '%Agua%'
+        WHERE (o.estatus = 'Activo' OR o.estatus = 'Servido') AND p.tipo NOT LIKE '%Coca%' AND p.tipo NOT LIKE '%Agua%'
             AND CONVERT(DATE, o.fecha) = CONVERT(DATE, GETDATE());
     END
         "; 
@@ -48,7 +48,7 @@ class procedures extends Migration
     CREATE PROC get_ordenes_mesero
     AS
     BEGIN
-        SELECT p.nombre, o.id, od.mesa, od.platillo, od.cantidad, od.descripcion, o.estatus
+        SELECT o.id, p.nombre, od.mesa, od.platillo, od.cantidad, od.descripcion, o.estatus
         FROM ordenes_detalles od
         INNER JOIN ordenes o ON o.id = od.id_orden
         INNER JOIN productos p ON p.id = od.id_producto
