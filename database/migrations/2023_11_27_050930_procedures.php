@@ -39,7 +39,7 @@ class procedures extends Migration
         FROM ordenes_detalles od
         INNER JOIN ordenes o ON o.id = od.id_orden
         INNER JOIN productos p ON p.id = od.id_producto
-        WHERE (o.estatus = 'Activo' OR o.estatus = 'Servido') AND p.tipo NOT LIKE '%Coca%' AND p.tipo NOT LIKE '%Agua%'
+        WHERE (o.estatus = 'Activo') AND p.tipo NOT LIKE '%Coca%' AND p.tipo NOT LIKE '%Agua%'
             AND CONVERT(DATE, o.fecha) = CONVERT(DATE, GETDATE());
     END
         "; 
