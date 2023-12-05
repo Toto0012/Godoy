@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SucursalRequest;
 use App\Models\Sucursal;
-use Illuminate\Http\Request;
 
 class SucursalController extends Controller
 {

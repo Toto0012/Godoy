@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OrdenDetalleRequest;
 use App\Models\Orden;
 use App\Models\OrdenDetalle;
 use Illuminate\Http\Request;

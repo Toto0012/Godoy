@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrdenRequest;
 use App\Models\Orden;
-use Illuminate\Http\Request;
 
 class OrdenController extends Controller
 {
