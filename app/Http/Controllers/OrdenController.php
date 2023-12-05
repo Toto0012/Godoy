@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrdenRequest;
 use App\Models\Orden;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class OrdenController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(OrdenRequest $request)
     {
         $data = Orden::create([
             "id_usuario" => $request->id_usuario,
@@ -47,7 +48,7 @@ class OrdenController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(OrdenRequest $request, string $id)
     {
         $data = Orden::findOrFail($id);
 

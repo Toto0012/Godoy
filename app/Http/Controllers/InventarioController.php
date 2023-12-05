@@ -21,25 +21,6 @@ class InventarioController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(InventarioRequest $request)
-    {
-        $data = Inventario::create([
-            'nombre' => $request->nombre,
-            'habia' => $request->habia,
-            'entro' => $request->entro,
-            'quedo' => $request->quedo,
-            'gasto' => $request->gasto,
-            'precio' => $request->precio,
-            'fecha' => $request->fecha,
-            'sucursal_id' => $request->sucursal_id,
-        ]);
-
-        return response()->json(['data:' => $data]);
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(string $id)
@@ -51,7 +32,7 @@ class InventarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(InventarioRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
         $data = Inventario::findOrFail($id);       
         $data->update([

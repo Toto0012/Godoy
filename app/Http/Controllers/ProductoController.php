@@ -46,7 +46,7 @@ class ProductoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductoRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
         $data = Producto::findOrFail($id);
 

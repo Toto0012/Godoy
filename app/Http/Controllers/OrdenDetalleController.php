@@ -23,7 +23,7 @@ class OrdenDetalleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(OrdenDetalleRequest $request)
     {
         $json = $request->json()->all();
 
@@ -103,11 +103,11 @@ class OrdenDetalleController extends Controller
         return response()->json(['data:' => $data]);
     }
 
-    public function servido(Request $request, string $id){
+    public function servido(string $id){
         
         $data = Orden::findOrFail($id);
 
-        $data->update(['estatus' => $request->estatus]);
+        $data->update(['estatus' => "Servido"]);
 
         return response()->json(['data:' => $data]);
     }
