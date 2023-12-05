@@ -35,7 +35,7 @@ class procedures extends Migration
     CREATE PROC get_ordenes_cocinero
     AS
     BEGIN
-        SELECT o.id, p.nombre, ,od.mesa, od.platillo, od.cantidad, o.estatus, od.descripcion
+        SELECT o.id, p.nombre, od.mesa, od.platillo, od.cantidad, o.estatus, od.descripcion
         FROM ordenes_detalles od
         INNER JOIN ordenes o ON o.id = od.id_orden
         INNER JOIN productos p ON p.id = od.id_producto
